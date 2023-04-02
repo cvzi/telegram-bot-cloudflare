@@ -26,18 +26,17 @@ addEventListener('fetch', event => {
  * Handle requests to WEBHOOK
  * https://core.telegram.org/bots/api#update
  */
-function handleWebhook (event) {
+async function handleWebhook (event) {
   // Check secret
   if (event.request.headers.get('X-Telegram-Bot-Api-Secret-Token') !== SECRET) {
     return new Response('Unauthorized', { status: 403 })
   }
 
-  // Handle the request async
-  const handler = async function () {
-    const update = await event.request.json()
-    await onUpdate(update)
-  }
-  event.waitUntil(handler())
+  // Read request body synchronously
+  const update = await event.request.json()
+  // Deal with response asynchronously
+  event.waitUntil(onUpdate(update))
+
   return new Response('Ok')
 }
 
