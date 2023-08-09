@@ -47,6 +47,8 @@ async function handleWebhook (event) {
 async function onUpdate (update) {
   if ('message' in update) {
     await onMessage(update.message)
+  }else if ('inline_query' in update){
+    await onInlineQuery(update.inline_query)
   }
 }
 
@@ -55,7 +57,8 @@ async function onUpdate (update) {
  * https://core.telegram.org/bots/api#message
  */
 function onMessage (message) {
-  return sendPlainText(message.chat.id, 'Echo:\n' + message.text)
+  return sendPlainText(message.chat.id, 'This is an inline bot')
+
 }
 
 /**
@@ -68,6 +71,42 @@ async function sendPlainText (chatId, text) {
     text
   }))).json()
 }
+
+/**
+ * Handle incoming query
+ * https://core.telegram.org/bots/api#InlineQuery
+ * This will reply with a voice message but can be changed in type
+ * The input file is defined in the environment variables.
+ */
+async function onInlineQuery (inline_query) {
+var results = [];
+var res ="";
+var texy_json_input_files =""
+var parsed_input_files =""
+const json_input_files = await NAMESPACE.get("input_files");
+var number = 0
+
+parsed_input_files = JSON.parse(json_input_files)
+number = Object.keys(parsed_input_files).length
+for (var i=0;i<number;i++){
+  results.push({type:"voice",id:crypto.randomUUID(),voice_url:parsed_input_files[i][1], title:parsed_input_files[i][0],voice_duration:parsed_input_files[i][2],caption:parsed_input_files[i][3],parse_mode:"HTML"})
+}
+res = JSON.stringify(results)
+return SendInlineQuery(inline_query.id,res)
+}
+
+/**
+ * Send result of the query
+ * https://core.telegram.org/bots/api#answerinlinequery
+ */
+
+async function SendInlineQuery(inline_queryid, results){
+  return (await fetch(apiUrl('answerInlineQuery', {
+    inline_query_id: inline_queryid,
+  results
+}))).json()
+}
+
 
 /**
  * Set webhook to this worker's url

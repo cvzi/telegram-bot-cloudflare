@@ -2,9 +2,9 @@
  * https://github.com/cvzi/telegram-bot-cloudflare
  */
 
-const TOKEN = '123456789:Tnm6EJ8jjk_KhepfI8PlU1n7x0dAAy-QOxO' // Get it from @BotFather https://core.telegram.org/bots#6-botfather
+const TOKEN = ENV_BOT_TOKEN // Get it from @BotFather https://core.telegram.org/bots#6-botfather
 const WEBHOOK = '/endpoint'
-const SECRET = 'QUEVEDO_BZRP_Music_Sessions_52' // A-Z, a-z, 0-9, _ and -
+const SECRET = ENV_BOT_SECRET // A-Z, a-z, 0-9, _ and -
 
 /**
  * Wait for requests to the worker
