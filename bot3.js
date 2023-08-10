@@ -81,7 +81,6 @@ async function sendPlainText (chatId, text) {
 async function onInlineQuery (inline_query) {
 var results = [];
 var res ="";
-var texy_json_input_files =""
 var parsed_input_files =""
 const json_input_files = await NAMESPACE.get("input_files");
 var number = 0
