@@ -44,9 +44,13 @@ and create [MarkdownV2](https://core.telegram.org/bots/api#markdownv2-style)-for
 
 The file [bot3.js](bot3.js) contains an improved version that replies inline queries with voice messages.
 The voice messages should be stored in OPUS format and .ogg in the cloud you most like.
-The audio files are listed in a JSON array with the following structure in a KV namespace called `NAMESPACE` and with this content (filled in) under the key `input_files`:
+The audio files are listed in a JSON array with the following structure in a KV namespace called `NAMESPACE` and with following content under the key `input_files`.
 
-```json
+Go to *Workers & Pages* -> *KV* and create a new namespace. Add a new key `input_files` and store the JSON structure from below with your own audio files.
+
+Now in *Overview* -> your-worker -> *Settings* -> *Variables* -> *KV Namespace Bindings* bind the namespace to a variable called `NAMESPACE`.
+
+```javascript
  [
     [
       "File Name",
@@ -62,11 +66,6 @@ The audio files are listed in a JSON array with the following structure in a KV 
     ],
   ]
 ```
-
-On your Cloudflare worker go to Settings -> Variables.
-Set the environment variables `ENV_BOT_TOKEN` and `ENV_BOT_SECRET`.
-On Workers & Pages -> KV create a new namespace and add a new key `input_files` with the JSON content from above.
-Now in Overview -> your-worker -> Settings -> Variables -> KV Namespace Bindings bind the namespace to a variable called `NAMESPACE``.
 
 ---
 
