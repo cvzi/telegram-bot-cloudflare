@@ -84,9 +84,9 @@ async function onInlineQuery (inlineQuery) {
   const parsedInputFiles = JSON.parse(jsonInputFiles)
   const number = Object.keys(parsedInputFiles).length
   for (let i = 0; i < number; i++) {
-    let caption = parsedInputFiles[i][3]
-    let title = parsedInputFiles[i][0]
-    if ((caption.toLowerCase().includes(search.toLowerCase()))||title.toLowerCase().includes(search.toLowerCase())){
+    const caption = parsedInputFiles[i][3]
+    const title = parsedInputFiles[i][0]
+    if ((caption.toLowerCase().includes(search.toLowerCase())) || title.toLowerCase().includes(search.toLowerCase())) {
       results.push({
         type: 'voice',
         id: crypto.randomUUID(),
