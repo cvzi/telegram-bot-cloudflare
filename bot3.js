@@ -79,19 +79,24 @@ async function sendPlainText (chatId, text) {
  */
 async function onInlineQuery (inlineQuery) {
   const results = []
+  const search = inlineQuery.query
   const jsonInputFiles = await NAMESPACE.get('input_files')
   const parsedInputFiles = JSON.parse(jsonInputFiles)
   const number = Object.keys(parsedInputFiles).length
   for (let i = 0; i < number; i++) {
-    results.push({
-      type: 'voice',
-      id: crypto.randomUUID(),
-      voice_url: parsedInputFiles[i][1],
-      title: parsedInputFiles[i][0],
-      voice_duration: parsedInputFiles[i][2],
-      caption: parsedInputFiles[i][3],
-      parse_mode: 'HTML'
-    })
+    let caption = parsedInputFiles[i][3]
+    let title = parsedInputFiles[i][0]
+    if ((caption.toLowerCase().includes(search.toLowerCase()))||title.toLowerCase().includes(search.toLowerCase())){
+      results.push({
+        type: 'voice',
+        id: crypto.randomUUID(),
+        voice_url: parsedInputFiles[i][1],
+        title: parsedInputFiles[i][0],
+        voice_duration: parsedInputFiles[i][2],
+        caption: parsedInputFiles[i][3],
+        parse_mode: 'HTML'
+      })
+    }
   }
   const res = JSON.stringify(results)
   return SendInlineQuery(inlineQuery.id, res)
