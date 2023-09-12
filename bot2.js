@@ -157,7 +157,7 @@ async function sendInlineButtons (chatId, text, buttons) {
 /**
  * Answer callback query (inline button press)
  * This stops the loading indicator on the button and optionally shows a message
- * https://core.telegram.org/bots/api#sendmessage
+ * https://core.telegram.org/bots/api#answercallbackquery
  */
 async function answerCallbackQuery (callbackQueryId, text = null) {
   const data = {
