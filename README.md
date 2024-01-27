@@ -66,7 +66,9 @@ Now in *Overview* -> your-worker -> *Settings* -> *Variables* -> *KV Namespace B
     ],
   ]
 ```
+## bot4.js
+The bot4 is a bot that randomly reacts to messages received. It demostrates how to use big reactions when the 🎉 emoji gets chosen.
+
 
 ---
-
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
