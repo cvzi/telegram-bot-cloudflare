@@ -6,9 +6,7 @@ const TOKEN = ENV_BOT_TOKEN // Get it from @BotFather https://core.telegram.org/
 const WEBHOOK = '/endpoint'
 const SECRET = ENV_BOT_SECRET // A-Z, a-z, 0-9, _ and -
 
-const reactions_ = ["👍", "👎", "❤", "🔥", "🥰", "👏", "😁", "🤔", "🤯", "😱", "🤬", "😢", "🎉", "🤩", "🤮", "💩", "🙏", "👌", "🕊", "🤡", "🥱", "🥴", "😍", "🐳", "❤‍🔥", "🌚", "🌭", "💯", "🤣", "⚡", "🍌", "🏆", "💔", "🤨", "😐", "🍓", "🍾", "💋", "🖕", "😈", "😴", "😭", "🤓", "👻", "👨‍💻", "👀", "🎃", "🙈", "😇", "😨", "🤝", "✍", "🤗", "🫡", "🎅", "🎄", "☃", "💅", "🤪", "🗿", "🆒", "💘", "🙉", "🦄", "😘", "💊", "🙊", "😎", "👾", "🤷‍♂", "🤷", "🤷‍♀", "😡"]
-
-
+const reactions_ = ['👍', '👎', '❤', '🔥', '🥰', '👏', '😁', '🤔', '🤯', '😱', '🤬', '😢', '🎉', '🤩', '🤮', '💩', '🙏', '👌', '🕊', '🤡', '🥱', '🥴', '😍', '🐳', '❤‍🔥', '🌚', '🌭', '💯', '🤣', '⚡', '🍌', '🏆', '💔', '🤨', '😐', '🍓', '🍾', '💋', '🖕', '😈', '😴', '😭', '🤓', '👻', '👨‍💻', '👀', '🎃', '🙈', '😇', '😨', '🤝', '✍', '🤗', '🫡', '🎅', '🎄', '☃', '💅', '🤪', '🗿', '🆒', '💘', '🙉', '🦄', '😘', '💊', '🙊', '😎', '👾', '🤷‍♂', '🤷', '🤷‍♀', '😡']
 
 /**
  * Wait for requests to the worker
@@ -61,7 +59,7 @@ async function onUpdate (update) {
  * https://core.telegram.org/bots/api#message
  */
 function onMessage (message) {
-  return setMessageReaction (message)
+  return setMessageReaction(message)
 }
 
 /**
@@ -79,33 +77,28 @@ async function sendPlainText (chatId, text) {
  * Set Message Reaction
  * https://core.telegram.org/bots/api#setmessagereaction
  */
-
-async function setMessageReaction (message){
-  let reaction_ = []
-  let re
-  let emoji_
+async function setMessageReaction (message) {
+  const reaction_ = []
   const min = 0
   const max = reactions_.length
-  let big_ = false
-  re = Math.floor(Math.random() * (max - min) + min)
-  emoji_ = reactions_[re]
-  if (emoji_=='🎉'){
-    big_ = true
+  const re = Math.floor(Math.random() * (max - min) + min)
+  const emoji = reactions_[re]
+  let big = false
+  if (emoji === '🎉') {
+    big = true
   }
-  reaction_.push( {type:'emoji',
-              emoji:emoji_
-            })
-  const res = JSON.stringify(reaction_)
+
+  reaction_.push({
+    type: 'emoji',
+    emoji
+  })
   return (await fetch(apiUrl('setMessageReaction', {
     chat_id: message.chat.id,
-    message_id:message.message_id,
-    reaction:res,
-    is_big: big_
+    message_id: message.message_id,
+    reaction: JSON.stringify(reaction_),
+    is_big: big
   }))).json()
-
 }
-
-
 
 /**
  * Set webhook to this worker's url
