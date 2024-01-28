@@ -87,6 +87,8 @@ async function setMessageReaction (message){
   const min = 0
   const max = reactions_.length
   let big_ = false
+  re = Math.floor(Math.random() * (max - min) + min)
+  emoji_ = reactions_[re]
   if (emoji_=='🎉'){
     big_ = true
   }
