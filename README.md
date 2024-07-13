@@ -70,5 +70,9 @@ Now in *Overview* -> your-worker -> *Settings* -> *Variables* -> *KV Namespace B
 The bot4 is a bot that randomly reacts to messages received. It demostrates how to use big reactions when the 🎉 emoji gets chosen.
 
 
+## License
+
+The source-code is licensed under the CC0-1.0 license. If you need a different license, there are also branches with the [MIT](https://github.com/cvzi/telegram-bot-cloudflare/tree/mit) and [GPL 3](https://github.com/cvzi/telegram-bot-cloudflare/tree/gnu-gpl-v3-or-later) license.
+
 ---
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
